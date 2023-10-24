@@ -58,19 +58,20 @@ fun RowScope.BottomItem(
     currentDestination: NavDestination?,
     navController: NavHostController
 ) {
+    val isSelected = currentDestination?.hierarchy?.any {
+        it.route == screen.route
+    } == true
     BottomNavigationItem(
         icon = {
             Icon(
-                imageVector = screen.icon,
+                imageVector = if (isSelected) screen.icon else screen.selectedIcon,
                 contentDescription = null,
             )
         },
         label = {
             Text(text = screen.title)
         },
-        selected = currentDestination?.hierarchy?.any {
-            it.route == screen.route
-        } == true,
+        selected = isSelected,
         unselectedContentColor = LocalContentColor.current.copy(alpha = ContentAlpha.disabled),
         onClick = {
             navController.navigate(screen.route) {
