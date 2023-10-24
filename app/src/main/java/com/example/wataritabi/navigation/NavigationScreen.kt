@@ -1,14 +1,16 @@
 package com.example.wataritabi.navigation
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -16,17 +18,17 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.wear.compose.material3.ContentAlpha
 
 @Preview
-//@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun NavigationScreen() {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = { BottomBar(navController = navController) }
-    ) {
-        BottomNavGraph(navController = navController)
+    ) { contentPadding ->
+        Box(modifier = Modifier.padding(contentPadding)) {
+            BottomNavGraph(navController = navController)
+        }
     }
 }
 
@@ -41,7 +43,7 @@ fun BottomBar(navController: NavHostController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    BottomNavigation {
+    NavigationBar {
         screens.forEach { screen ->
             BottomItem(
                 screen = screen,
@@ -56,12 +58,12 @@ fun BottomBar(navController: NavHostController) {
 fun RowScope.BottomItem(
     screen: BottomBarScreen,
     currentDestination: NavDestination?,
-    navController: NavHostController
+    navController: NavHostController,
 ) {
     val isSelected = currentDestination?.hierarchy?.any {
         it.route == screen.route
     } == true
-    BottomNavigationItem(
+    NavigationBarItem(
         icon = {
             Icon(
                 imageVector = if (isSelected) screen.icon else screen.selectedIcon,
@@ -72,7 +74,6 @@ fun RowScope.BottomItem(
             Text(text = screen.title)
         },
         selected = isSelected,
-        unselectedContentColor = LocalContentColor.current.copy(alpha = ContentAlpha.disabled),
         onClick = {
             navController.navigate(screen.route) {
                 popUpTo(navController.graph.findStartDestination().id) {
