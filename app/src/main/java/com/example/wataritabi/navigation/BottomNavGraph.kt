@@ -5,9 +5,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.wataritabi.ui.compose.album.AlbumScreen
+import com.example.wataritabi.ui.compose.map.MapScreen
 import com.example.wataritabi.ui.compose.memo.MemoScreen
 import com.example.wataritabi.ui.compose.schedule.ScheduleScreen
-import com.example.wataritabi.ui.compose.wallet.WalletScreen
 
 @Composable
 fun BottomNavGraph(navController: NavHostController) {
@@ -24,8 +24,8 @@ fun BottomNavGraph(navController: NavHostController) {
         composable(route = BottomBarScreen.Memo.route) {
             MemoScreen()
         }
-        composable(route = BottomBarScreen.Wallet.route) {
-            WalletScreen()
+        composable(route = BottomBarScreen.Map.route) {
+            MapScreen()
         }
     }
 }
