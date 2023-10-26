@@ -9,6 +9,8 @@ import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,7 +24,9 @@ import com.google.maps.android.compose.rememberCameraPositionState
 
 @Composable
 fun MapScreen() {
+    val markerItems = remember { mutableStateListOf<LatLng>() }
     val tokyoStation = LatLng(35.6809591, 139.7673068)
+    val sample = LatLng(36.0, 140.0)
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(tokyoStation, 10f)
     }
@@ -31,14 +35,19 @@ fun MapScreen() {
             modifier = Modifier.fillMaxSize(),
             cameraPositionState = cameraPositionState
         ) {
-            Marker(
-                state = MarkerState(position = tokyoStation),
-                title = "東京駅",
-                snippet = "Marker in Tokyo Station"
-            )
+            markerItems.forEach { markerItem ->
+                Marker(
+                    state = MarkerState(position = markerItem),
+                    title = "${markerItem.latitude},${markerItem.longitude}",
+                    snippet = "Marker"
+                )
+            }
         }
         ExtendedFloatingActionButton(
-            onClick = {},
+            onClick = {
+                markerItems.add(tokyoStation)
+                markerItems.add(sample)
+            },
             Modifier
                 .align(Alignment.BottomEnd)
                 .padding(
