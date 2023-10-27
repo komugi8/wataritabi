@@ -15,9 +15,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.example.wataritabi.navigation.BottomBarScreen
 
 @Composable
-fun DestinationScreen() {
+fun DestinationScreen(navController: NavController) {
     var text by remember {
         mutableStateOf("")
     }
@@ -30,12 +32,12 @@ fun DestinationScreen() {
         )
         Row {
             Button(
-                onClick = {},
+                onClick = { navController.navigate(BottomBarScreen.Map.route) },
                 modifier = Modifier.padding(end = 16.dp)
             ) {
                 Text(text = "add")
             }
-            FilledTonalButton(onClick = {}) {
+            FilledTonalButton(onClick = { navController.navigate(BottomBarScreen.Map.route) }) {
                 Text(text = "cancel")
             }
         }
@@ -45,5 +47,5 @@ fun DestinationScreen() {
 @Preview(showBackground = true)
 @Composable
 fun DestinationScreenPreview() {
-    DestinationScreen()
+    //DestinationScreen()
 }

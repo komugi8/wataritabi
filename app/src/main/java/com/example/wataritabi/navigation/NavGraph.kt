@@ -29,7 +29,7 @@ fun NavGraph(navController: NavHostController) {
             MapScreen(navController)
         }
         composable(route = "Destination") {
-            DestinationScreen()
+            DestinationScreen(navController)
         }
     }
 }
