@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
@@ -23,7 +24,7 @@ import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
 
 @Composable
-fun MapScreen() {
+fun MapScreen(navController: NavController) {
     val markerItems = remember { mutableStateListOf<LatLng>() }
     val tokyoStation = LatLng(35.6809591, 139.7673068)
     val sample = LatLng(36.0, 140.0)
@@ -47,6 +48,7 @@ fun MapScreen() {
             onClick = {
                 markerItems.add(tokyoStation)
                 markerItems.add(sample)
+                navController.navigate("Destination")
             },
             Modifier
                 .align(Alignment.BottomEnd)
@@ -64,5 +66,5 @@ fun MapScreen() {
 @Preview
 @Composable
 fun MapScreenPreview() {
-    MapScreen()
+    // MapScreen()
 }
