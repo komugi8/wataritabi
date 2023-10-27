@@ -1,4 +1,4 @@
-package com.example.wataritabi.ui.compose.map
+package com.example.wataritabi.compose.map
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

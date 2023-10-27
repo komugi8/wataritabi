@@ -1,4 +1,4 @@
-package com.example.wataritabi.ui.compose.destination
+package com.example.wataritabi.compose.destination
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
