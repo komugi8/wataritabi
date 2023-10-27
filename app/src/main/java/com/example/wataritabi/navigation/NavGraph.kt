@@ -11,7 +11,7 @@ import com.example.wataritabi.ui.compose.memo.MemoScreen
 import com.example.wataritabi.ui.compose.schedule.ScheduleScreen
 
 @Composable
-fun BottomNavGraph(navController: NavHostController) {
+fun NavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
         startDestination = BottomBarScreen.Schedule.route
