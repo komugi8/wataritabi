@@ -27,7 +27,7 @@ fun NavigationScreen() {
         bottomBar = { BottomBar(navController = navController) }
     ) { contentPadding ->
         Box(modifier = Modifier.padding(contentPadding)) {
-            BottomNavGraph(navController = navController)
+            NavGraph(navController = navController)
         }
     }
 }
