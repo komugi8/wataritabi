@@ -1,7 +1,8 @@
 package com.example.wataritabi.model
 
+import com.google.android.gms.maps.model.LatLng
+
 data class MapModel(
     val currentAddress: String = "",
-    var latitude: Double = 35.6809591,
-    var longitude: Double = 139.7673068,
+    var location: MutableList<LatLng> = mutableListOf(),
 )

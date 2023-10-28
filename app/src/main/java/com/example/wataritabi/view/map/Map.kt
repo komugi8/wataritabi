@@ -11,8 +11,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,7 +30,6 @@ fun MapScreen(
     mv: MapViewModel,
 ) {
     val mapUiState by mv.uiState.collectAsState()
-    val markerItems = remember { mutableStateListOf<LatLng>() }
     val tokyoStation = LatLng(35.6809591, 139.7673068)
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(tokyoStation, 10f)
@@ -42,17 +39,11 @@ fun MapScreen(
             modifier = Modifier.fillMaxSize(),
             cameraPositionState = cameraPositionState
         ) {
-//            markerItems.forEach { markerItem ->
-//                Marker(
-//                    state = MarkerState(position = markerItem),
-//                    title = "${markerItem.latitude},${markerItem.longitude}",
-//                    snippet = "Marker"
-//                )
-//            }
-
-            Marker(
-                state = MarkerState(position = LatLng(mapUiState.latitude, mapUiState.longitude))
-            )
+            mapUiState.location.forEach { markerItem ->
+                Marker(
+                    state = MarkerState(position = markerItem),
+                )
+            }
         }
         ExtendedFloatingActionButton(
             onClick = {

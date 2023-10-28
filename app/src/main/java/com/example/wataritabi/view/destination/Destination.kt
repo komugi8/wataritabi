@@ -16,9 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.wataritabi.model.MapModel
 import com.example.wataritabi.navigation.BottomBarScreen
 import com.example.wataritabi.viewmodel.MapViewModel
+import com.google.android.gms.maps.model.LatLng
 
 @Composable
 fun DestinationScreen(
@@ -49,7 +49,7 @@ fun DestinationScreen(
                 onClick = {
                     val enteredLatitude = latitude.toDoubleOrNull() ?: 0.0
                     val enteredLongitude = longitude.toDoubleOrNull() ?: 0.0
-                    val newDestination = MapModel("", enteredLatitude, enteredLongitude)
+                    val newDestination = LatLng(enteredLatitude, enteredLongitude)
                     mv.addDestination(newDestination)
                     navController.navigate(BottomBarScreen.Map.route)
                 },
