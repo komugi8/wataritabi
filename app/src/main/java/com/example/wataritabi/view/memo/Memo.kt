@@ -1,4 +1,4 @@
-package com.example.wataritabi.compose.memo
+package com.example.wataritabi.view.memo
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

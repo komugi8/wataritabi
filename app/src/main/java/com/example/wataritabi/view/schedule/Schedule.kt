@@ -1,4 +1,4 @@
-package com.example.wataritabi.compose.schedule
+package com.example.wataritabi.view.schedule
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

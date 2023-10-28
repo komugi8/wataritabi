@@ -1,17 +1,22 @@
 package com.example.wataritabi.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.wataritabi.compose.album.AlbumScreen
-import com.example.wataritabi.compose.destination.DestinationScreen
-import com.example.wataritabi.compose.map.MapScreen
-import com.example.wataritabi.compose.memo.MemoScreen
-import com.example.wataritabi.compose.schedule.ScheduleScreen
+import com.example.wataritabi.view.album.AlbumScreen
+import com.example.wataritabi.view.destination.DestinationScreen
+import com.example.wataritabi.view.map.MapScreen
+import com.example.wataritabi.view.memo.MemoScreen
+import com.example.wataritabi.view.schedule.ScheduleScreen
+import com.example.wataritabi.viewmodel.MapViewModel
 
 @Composable
-fun NavGraph(navController: NavHostController) {
+fun NavGraph(
+    navController: NavHostController,
+    mapViewModel: MapViewModel = viewModel(),
+) {
     NavHost(
         navController = navController,
         startDestination = BottomBarScreen.Schedule.route
@@ -26,10 +31,10 @@ fun NavGraph(navController: NavHostController) {
             MemoScreen()
         }
         composable(route = BottomBarScreen.Map.route) {
-            MapScreen(navController)
+            MapScreen(navController, mapViewModel)
         }
         composable(route = "Destination") {
-            DestinationScreen(navController)
+            DestinationScreen(navController, mapViewModel)
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.wataritabi.compose.album
+package com.example.wataritabi.view.album
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
