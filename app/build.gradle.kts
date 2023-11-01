@@ -1,9 +1,15 @@
+import java.util.Properties
+
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+}
 
+val localProperties = Properties()
+file("local.properties").inputStream().use { input ->
+    localProperties.load(input)
 }
 
 android {
@@ -21,6 +27,11 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        buildConfigField(
+            "String",
+            "MAPS_API_KEY",
+            "\"${localProperties.getProperty("MAPS_API_KEY")}\""
+        )
     }
 
     buildTypes {
@@ -32,6 +43,18 @@ android {
             )
         }
     }
+    secrets {
+        // To add your Google Maps Platform API key to this project:
+        // 1. Create or open file local.properties in this folder, which will be ready by default
+        //    by secrets_gradle_plugin
+        // 2. Add this line, replacing YOUR_API_KEY with a key from a project with Places API enabled:
+        //        PLACES_API_KEY=YOUR_API_KEY
+        // 3. Add this line, replacing YOUR_API_KEY with a key from a project with Maps SDK for Android
+        //    enabled (can be the same project and key as in Step 2):
+        //        MAPS_API_KEY=YOUR_API_KEY
+        propertiesFileName = "local.properties"
+        defaultPropertiesFileName = "local.properties"
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -41,6 +64,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -76,4 +100,8 @@ dependencies {
     implementation("com.google.maps.android:maps-compose:2.11.4")
     implementation("com.google.android.gms:play-services-maps:18.1.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
+    implementation("com.google.android.libraries.places:places:3.2.0")
+//    implementation(fileTree("libs") {
+//        include("*.jar")
+//    })
 }
