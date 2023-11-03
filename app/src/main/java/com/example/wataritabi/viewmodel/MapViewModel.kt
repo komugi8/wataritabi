@@ -1,6 +1,8 @@
 package com.example.wataritabi.viewmodel
 
 import android.content.ContentValues
+import android.content.ContentValues.TAG
+import android.graphics.Bitmap
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -15,6 +17,7 @@ import com.google.android.libraries.places.api.model.AutocompleteSessionToken
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.PlaceTypes
 import com.google.android.libraries.places.api.model.RectangularBounds
+import com.google.android.libraries.places.api.net.FetchPhotoRequest
 import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.PlacesClient
@@ -84,4 +87,42 @@ class MapViewModel : ViewModel() {
                 }
         }
     }
+
+    data class PhotoModel(
+        var photoBitmap: Bitmap? = null,
+    )
+
+    val photoUiState = mutableStateOf(PhotoModel())
+
+    fun getPlacePhoto(placesClient: PlacesClient) {
+        val samplePlaceId = _uiState.value.placeId[0]
+        val fields = listOf(Place.Field.PHOTO_METADATAS)
+        val placeRequest = FetchPlaceRequest.newInstance(samplePlaceId, fields)
+
+        placesClient.fetchPlace(placeRequest)
+            .addOnSuccessListener { response ->
+                val place = response.place
+                val metadata = place.photoMetadatas
+                if (metadata == null || metadata.isEmpty()) {
+                    Log.w(TAG, "No photo metadata.")
+                    return@addOnSuccessListener
+                }
+                val photoMetadata = metadata.first()
+                val attributions = photoMetadata?.attributions
+                val photoRequest = FetchPhotoRequest.builder(photoMetadata)
+                    .setMaxWidth(500)
+                    .setMaxHeight(300)
+                    .build()
+                placesClient.fetchPhoto(photoRequest)
+                    .addOnSuccessListener { fetchPhotoResponse ->
+                        val bitmap = fetchPhotoResponse.bitmap
+                        photoUiState.value.photoBitmap = bitmap
+                    }.addOnFailureListener { exception ->
+                        if (exception is ApiException) {
+                            Log.e(ContentValues.TAG, "Place not found: ${exception.statusCode}")
+                        }
+                    }
+            }
+    }
+
 }
