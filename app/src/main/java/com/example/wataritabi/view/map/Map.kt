@@ -62,10 +62,6 @@ fun MapScreen(
                 Text(text = "目的地の編集")
             }
         }
-//        Image(
-//            painter = BitmapPainter(mv.photoUiState.value.photoBitmap!!.asImageBitmap()),
-//            contentDescription = null
-//        )
     }
 }
 

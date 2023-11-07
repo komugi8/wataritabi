@@ -2,7 +2,6 @@ package com.example.wataritabi.viewmodel
 
 import android.content.ContentValues
 import android.content.ContentValues.TAG
-import android.graphics.Bitmap
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -10,7 +9,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.wataritabi.model.MapModel
+import com.example.wataritabi.data.model.MapModel
+import com.example.wataritabi.data.model.PhotoModel
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken
@@ -87,10 +87,7 @@ class MapViewModel : ViewModel() {
                 }
         }
     }
-
-    data class PhotoModel(
-        var photoBitmap: Bitmap? = null,
-    )
+    
 
     val photoUiState = mutableStateOf(PhotoModel())
 
