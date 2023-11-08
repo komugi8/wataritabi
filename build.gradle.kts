@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.kotlinAndroid) apply false
     id("com.android.library") version "8.0.2" apply false
+    id("com.google.dagger.hilt.android") version "2.44" apply false
 }
 buildscript {
     dependencies {
