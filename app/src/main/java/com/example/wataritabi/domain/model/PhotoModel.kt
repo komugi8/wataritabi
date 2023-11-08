@@ -1,4 +1,4 @@
-package com.example.wataritabi.data.model
+package com.example.wataritabi.domain.model
 
 import android.graphics.Bitmap
 

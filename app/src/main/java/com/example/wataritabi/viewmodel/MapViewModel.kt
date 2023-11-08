@@ -9,8 +9,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.wataritabi.data.model.MapModel
-import com.example.wataritabi.data.model.PhotoModel
+import com.example.wataritabi.domain.model.MapModel
+import com.example.wataritabi.domain.model.PhotoModel
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken
@@ -87,7 +87,7 @@ class MapViewModel : ViewModel() {
                 }
         }
     }
-    
+
 
     val photoUiState = mutableStateOf(PhotoModel())
 

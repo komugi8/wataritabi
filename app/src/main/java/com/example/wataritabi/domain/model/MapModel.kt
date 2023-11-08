@@ -1,4 +1,4 @@
-package com.example.wataritabi.data.model
+package com.example.wataritabi.domain.model
 
 import com.google.android.gms.maps.model.LatLng
 
