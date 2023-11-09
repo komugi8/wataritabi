@@ -9,7 +9,9 @@ import androidx.compose.ui.Modifier
 import com.example.wataritabi.navigation.NavigationScreen
 import com.example.wataritabi.ui.theme.WataritabiTheme
 import com.google.android.libraries.places.api.Places
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
