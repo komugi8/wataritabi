@@ -1,4 +1,4 @@
-package com.example.wataritabi.viewmodel
+package com.example.wataritabi.ui.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
