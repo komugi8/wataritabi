@@ -24,5 +24,5 @@ interface ScheduleDao {
     fun getAllSchedule(): Flow<List<ScheduleModel>>
 
     @Query("SELECT * FROM schedule_table WHERE scheduleId = :scheduleId")
-    fun getSchedule(scheduleId: Int): Flow<ScheduleModel>
+    suspend fun getSchedule(scheduleId: Int): ScheduleModel
 }

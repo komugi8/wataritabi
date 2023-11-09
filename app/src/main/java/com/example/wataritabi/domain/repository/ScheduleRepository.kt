@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface ScheduleRepository {
     fun getAllSchedule(): Flow<List<ScheduleModel>>
 
-    fun getSchedule(scheduleId: Int): Flow<ScheduleModel?>
+    suspend fun getSchedule(scheduleId: Int): ScheduleModel
 
     suspend fun insertSchedule(scheduleModel: ScheduleModel)
 

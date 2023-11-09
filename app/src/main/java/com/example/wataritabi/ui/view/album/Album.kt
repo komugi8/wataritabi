@@ -1,9 +1,9 @@
-package com.example.wataritabi.view.memo
+package com.example.wataritabi.ui.view.album
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-fun MemoScreen() {
-    Text(text = "memo")
+fun AlbumScreen() {
+    Text(text = "album")
 }

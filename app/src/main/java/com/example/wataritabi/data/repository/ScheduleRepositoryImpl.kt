@@ -5,10 +5,12 @@ import com.example.wataritabi.domain.model.ScheduleModel
 import com.example.wataritabi.domain.repository.ScheduleRepository
 import kotlinx.coroutines.flow.Flow
 
-class ScheduleRepositoryImpl(private val scheduleDao: ScheduleDao) : ScheduleRepository {
+class ScheduleRepositoryImpl(
+    private val scheduleDao: ScheduleDao,
+) : ScheduleRepository {
     override fun getAllSchedule(): Flow<List<ScheduleModel>> = scheduleDao.getAllSchedule()
 
-    override fun getSchedule(scheduleId: Int): Flow<ScheduleModel?> =
+    override suspend fun getSchedule(scheduleId: Int) =
         scheduleDao.getSchedule(scheduleId)
 
     override suspend fun insertSchedule(scheduleModel: ScheduleModel) =

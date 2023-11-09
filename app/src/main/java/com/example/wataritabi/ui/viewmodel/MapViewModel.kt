@@ -1,4 +1,4 @@
-package com.example.wataritabi.viewmodel
+package com.example.wataritabi.ui.viewmodel
 
 import android.content.ContentValues
 import android.content.ContentValues.TAG

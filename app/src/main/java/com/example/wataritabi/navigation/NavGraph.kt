@@ -5,12 +5,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.wataritabi.view.album.AlbumScreen
-import com.example.wataritabi.view.destination.DestinationScreen
-import com.example.wataritabi.view.map.MapScreen
-import com.example.wataritabi.view.memo.MemoScreen
-import com.example.wataritabi.view.schedule.ScheduleScreen
-import com.example.wataritabi.viewmodel.MapViewModel
+import com.example.wataritabi.ui.view.album.AlbumScreen
+import com.example.wataritabi.ui.view.destination.DestinationScreen
+import com.example.wataritabi.ui.view.map.MapScreen
+import com.example.wataritabi.ui.view.memo.MemoScreen
+import com.example.wataritabi.ui.view.schedule.ScheduleScreen
+import com.example.wataritabi.ui.viewmodel.MapViewModel
 
 @Composable
 fun NavGraph(
