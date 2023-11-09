@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.wataritabi.ui.compose.Header
 
 @Composable
 fun ScheduleScreen() {
@@ -30,6 +31,7 @@ fun ScheduleScreen() {
             .fillMaxSize()
             .padding(16.dp)
     ) {
+        Header(date = "Saturday 20, May 2023")
         Text(
             text = "今日の日程",
             style = MaterialTheme.typography.titleMedium,
@@ -66,7 +68,7 @@ fun ScheduleList(events: List<Event>) {
 
 data class Event(val time: String, val description: String)
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun ScheduleScreenPreview() {
     ScheduleScreen()
