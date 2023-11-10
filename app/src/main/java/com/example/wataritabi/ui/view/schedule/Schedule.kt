@@ -17,14 +17,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.wataritabi.domain.model.ScheduleModel
 import com.example.wataritabi.ui.viewmodel.ScheduleViewModel
 
 @Composable
 fun ScheduleScreen(
+    navController: NavController,
     viewModel: ScheduleViewModel = hiltViewModel(),
 ) {
     val scheduleList = viewModel.scheduleList.collectAsState(
@@ -52,7 +53,7 @@ fun ScheduleScreen(
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { /*TODO*/ },
+                onClick = { navController.navigate("ScheduleSetting") },
                 modifier = Modifier
                     .padding(16.dp)
             ) {
@@ -105,8 +106,8 @@ fun EventCards(events: List<ScheduleModel>) {
 
 data class Event(val time: String, val description: String)
 
-@Preview(showBackground = true)
-@Composable
-fun ScheduleScreenPreview() {
-    ScheduleScreen()
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun ScheduleScreenPreview() {
+//    ScheduleScreen()
+//}
