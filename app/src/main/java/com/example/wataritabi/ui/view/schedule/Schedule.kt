@@ -10,21 +10,40 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.wataritabi.domain.model.ScheduleModel
+import com.example.wataritabi.ui.viewmodel.ScheduleViewModel
 
 @Composable
-fun ScheduleScreen() {
-    val events = listOf(
-        Event("9:00 AM", "朝のミーティング"),
-        Event("10:30 AM", "クライアントとの電話"),
-        Event("12:00 PM", "昼食休憩"),
-        Event("2:00 PM", "プロジェクトの進捗報告"),
-        Event("4:00 PM", "新規プロジェクトの検討"),
-        Event("6:00 PM", "帰宅")
+fun ScheduleScreen(
+    viewModel: ScheduleViewModel = hiltViewModel(),
+) {
+    val scheduleList = viewModel.scheduleList.collectAsState(
+        initial = emptyList()
     )
-
+//    val events = listOf(
+//        Event("9:00 AM", "朝のミーティング"),
+//        Event("10:30 AM", "クライアントとの電話"),
+//        Event("12:00 PM", "昼食休憩"),
+//        Event("2:00 PM", "プロジェクトの進捗報告"),
+//        Event("4:00 PM", "新規プロジェクトの検討"),
+//        Event("6:00 PM", "帰宅")
+//    )
+    viewModel.addSchedule(
+        ScheduleModel(
+            0,
+            "hoge",
+            "2023/10/01",
+            "10:00",
+            "東京駅",
+            "東京駅",
+            "東京駅"
+        )
+    )
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -35,13 +54,13 @@ fun ScheduleScreen() {
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.padding(8.dp)
         )
-        ScheduleList(events = events)
+        EventCards(events = scheduleList.value)
     }
 }
 
 
 @Composable
-fun ScheduleList(events: List<Event>) {
+fun EventCards(events: List<ScheduleModel>) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -55,8 +74,8 @@ fun ScheduleList(events: List<Event>) {
                 Column(
                     modifier = Modifier.padding(16.dp)
                 ) {
-                    Text(text = event.time)
-                    Text(text = event.description)
+                    Text(text = event.scheduleTime)
+                    Text(text = event.scheduleMemo)
                 }
             }
         }
@@ -66,7 +85,7 @@ fun ScheduleList(events: List<Event>) {
 
 data class Event(val time: String, val description: String)
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun ScheduleScreenPreview() {
     ScheduleScreen()
