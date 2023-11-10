@@ -10,6 +10,7 @@ import com.example.wataritabi.ui.view.destination.DestinationScreen
 import com.example.wataritabi.ui.view.map.MapScreen
 import com.example.wataritabi.ui.view.memo.MemoScreen
 import com.example.wataritabi.ui.view.schedule.ScheduleScreen
+import com.example.wataritabi.ui.view.schedule_setting.ScheduleSetting
 import com.example.wataritabi.ui.viewmodel.MapViewModel
 
 @Composable
@@ -22,7 +23,7 @@ fun NavGraph(
         startDestination = BottomBarScreen.Schedule.route
     ) {
         composable(route = BottomBarScreen.Schedule.route) {
-            ScheduleScreen()
+            ScheduleScreen(navController)
         }
         composable(route = BottomBarScreen.Album.route) {
             AlbumScreen()
@@ -35,6 +36,9 @@ fun NavGraph(
         }
         composable(route = "Destination") {
             DestinationScreen(navController, mapViewModel)
+        }
+        composable(route = "ScheduleSetting") {
+            ScheduleSetting()
         }
     }
 }
